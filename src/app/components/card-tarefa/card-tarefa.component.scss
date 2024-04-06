@@ -1,0 +1,36 @@
+@import "bootstrap/scss/_functions.scss";
+@import "bootstrap/scss/_variables.scss";
+
+.card-tarefa {
+
+  min-width: 300px;
+
+  &__header {
+    background-color: $indigo-500;
+    color: $white;
+  }
+
+  &__icon-play {
+    color: green;
+  }
+
+  &__icon-trash {
+    color: red;
+  }
+
+  &__icon-corner-down-left {
+    color: black;
+  }
+
+  &__actions {
+
+    [data-feather="play"] {
+      color: green;
+      background-color: green;
+    }
+
+    > svg {
+      margin-right: 16px;
+    }
+  }
+}

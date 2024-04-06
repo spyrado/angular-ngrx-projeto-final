@@ -1,0 +1,19 @@
+<div class="card shadow rounded card-tarefa">
+  <div class="card-header card-tarefa__header">
+    {{ titulo }}
+  </div>
+  <div class="card-body p-0">
+    <ul class="list-group list-group-flush">
+      @for (tarefa of tarefas$ | async; track $index) {
+        <li class="list-group-item d-flex list-group-item-light">
+          <span class="me-4">{{ tarefa.nome }}</span>
+          <div class="card-tarefa__actions">
+            <i class="card-tarefa__icon-play" data-feather="play"></i>
+            <i class="card-tarefa__icon-trash" data-feather="trash"></i>
+            <i class="card-tarefa__icon-corner-down-left" data-feather="corner-down-left"></i>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+</div>
