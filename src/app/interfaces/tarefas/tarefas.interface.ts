@@ -1,4 +1,7 @@
+import { EtapaEnum } from "../../enums/etapa/etapa.enum";
+
 export interface ITarefa {
-  etapa: 'backlog' | 'iniciada' | 'finalizada',
+  id: number,
+  etapa: EtapaEnum,
   nome: string;
 }

@@ -1,14 +1,17 @@
 <div class="d-flex justify-content-around">
   <app-card-tarefa
     titulo="backlog"
+    [etapa]="EtapaEnum.BACKLOG"
   >
   </app-card-tarefa>
   <app-card-tarefa
     titulo="iniciadas"
+    [etapa]="EtapaEnum.INICIADA"
   >
   </app-card-tarefa>
   <app-card-tarefa
     titulo="finalizadas"
+    [etapa]="EtapaEnum.FINALIZADA"
   >
   </app-card-tarefa>
 </div>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CardTarefaComponent } from '../../components/card-tarefa/card-tarefa.component';
-import { ITarefa } from '../../interfaces';
+import { EtapaEnum } from '../../enums';
 
 @Component({
   selector: 'app-tarefa',
@@ -10,5 +10,7 @@ import { ITarefa } from '../../interfaces';
   styleUrl: './tarefa.component.scss'
 })
 export class TarefaComponent {
-  // public tarefas: ITarefa[] = [];
+
+  public EtapaEnum = EtapaEnum;
+  
 }

@@ -4,14 +4,27 @@
   </div>
   <div class="card-body p-0">
     <ul class="list-group list-group-flush">
-      @for (tarefa of tarefas$ | async; track $index) {
-        <li class="list-group-item d-flex list-group-item-light">
+      @for (tarefa of (tarefas$ | async) | filtraPorEtapa:etapa; track $index) {
+        <li class="list-group-item d-flex justify-content-between list-group-item-light">
           <span class="me-4">{{ tarefa.nome }}</span>
           <div class="card-tarefa__actions">
-            <i class="card-tarefa__icon-play" data-feather="play"></i>
-            <i class="card-tarefa__icon-trash" data-feather="trash"></i>
-            <i class="card-tarefa__icon-corner-down-left" data-feather="corner-down-left"></i>
+            @if (etapa === EtapaEnum.BACKLOG) {
+              <button (click)="iniciarTarefa(tarefa)" class="card-tarefa__icon-button" aria-label="iniciar tarefa">
+                <i aria-hidden="true" class="card-tarefa__icon-play" data-feather="play"></i>
+              </button>
+            } @else {
+              <button class="card-tarefa__icon-button" aria-label="voltar tarefa">
+                <i aria-hidden="true" class="card-tarefa__icon-corner-down-left" data-feather="corner-down-left"></i>
+              </button>
+            }
+            <button class="card-tarefa__icon-button" aria-label="excluir tarefa">
+              <i aria-hidden="true" class="card-tarefa__icon-trash" data-feather="trash"></i>
+            </button>
           </div>
+        </li>
+      } @empty {
+        <li class="list-group-item d-flex justify-content-center list-group-item-light">
+          <span class="me-4">lista vazia</span>
         </li>
       }
     </ul>

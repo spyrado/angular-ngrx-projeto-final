@@ -6,19 +6,23 @@ import { carregaTarefas } from '../../pages/tarefa/store/tarefa.selector';
 import { CommonModule } from '@angular/common';
 import { tarefaActions } from '../../pages/tarefa/store/tarefa.actions';
 import { IAppState } from '../../store/app.state';
+import { EtapaEnum } from '../../enums';
+import { FiltraPorEtapaPipe } from "../../pipes/filtra-por-etapa.pipe";
 
 @Component({
-  selector: 'app-card-tarefa',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './card-tarefa.component.html',
-  styleUrl: './card-tarefa.component.scss'
+    selector: 'app-card-tarefa',
+    standalone: true,
+    templateUrl: './card-tarefa.component.html',
+    styleUrl: './card-tarefa.component.scss',
+    imports: [CommonModule, FiltraPorEtapaPipe]
 })
 export class CardTarefaComponent implements AfterViewInit, OnInit {
 
   @Input() titulo: string = '';
+  @Input({ required: true }) etapa!: EtapaEnum;
 
   public tarefas$ = this._store.select<ITarefa[]>(carregaTarefas);
+  public EtapaEnum = EtapaEnum;
 
   constructor(private _store: Store<IAppState>) {}
 
@@ -28,5 +32,9 @@ export class CardTarefaComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit(): void {
     feather.replace();
+  }
+
+  public iniciarTarefa(tarefa: ITarefa): void {
+    this._store.dispatch(tarefaActions.iniciarTarefa(tarefa));
   }
 }
