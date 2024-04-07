@@ -11,17 +11,21 @@ const initialState: IPayloadReducer<ITarefa[]> = {
 
 export const tarefaReducer = createReducer(
   initialState,
-  on(tarefaActions.carregaTarefas, (state) => {
-    console.log('CARREGANDO TAREFAS')
+  on(tarefaActions.carregarTarefas, (state) => {
     return {
       ...state,
-      data: tarefas,
       status: StatusEnum.carregando
     }
   }),
+  on(tarefaActions.tarefasCarregadasComSucesso, (state, data) => {
+    console.log('tarefasCarregadasComSucesso ')
+    return {
+      ...state,
+      data: [...state.data, ...data.tarefas],
+      status: StatusEnum.sucesso
+    }
+  }),
   on(tarefaActions.iniciarTarefa, (state, tarefa) => {
-    console.log("state: ", state);
-    console.log("tarefa: ", tarefa);
     const novoEstado = {...state};
     novoEstado.data = novoEstado.data.filter(item => item.id !== tarefa.id);
     const tarefaAtualizada: ITarefa = {
@@ -38,16 +42,3 @@ export const tarefaReducer = createReducer(
     };
   })
 )
-
-const tarefas: ITarefa[] = [
-  {
-    id: 1,
-    etapa: EtapaEnum.BACKLOG,
-    nome: 'passear com o cachorro'
-  },
-  {
-    id: 2,
-    etapa: EtapaEnum.INICIADA,
-    nome: 'estudar'
-  },
-];

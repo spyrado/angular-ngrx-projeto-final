@@ -2,16 +2,19 @@
   <app-card-tarefa
     titulo="backlog"
     [etapa]="EtapaEnum.BACKLOG"
+    [tarefas]="(tarefas$ | async) ?? []"
   >
   </app-card-tarefa>
   <app-card-tarefa
     titulo="iniciadas"
     [etapa]="EtapaEnum.INICIADA"
+    [tarefas]="(tarefas$ | async) ?? []"
   >
   </app-card-tarefa>
   <app-card-tarefa
     titulo="finalizadas"
     [etapa]="EtapaEnum.FINALIZADA"
+    [tarefas]="(tarefas$ | async) ?? []"
   >
   </app-card-tarefa>
 </div>

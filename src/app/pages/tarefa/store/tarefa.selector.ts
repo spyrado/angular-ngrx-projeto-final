@@ -1,3 +1,7 @@
 import { IAppState } from "../../../store/app.state";
 
-export const carregaTarefas = (state: IAppState) => state.tarefas.data;
+const carregarTarefas = (state: IAppState) => state.tarefas.data;
+
+export const tarefaSelectors = {
+  carregarTarefas
+}

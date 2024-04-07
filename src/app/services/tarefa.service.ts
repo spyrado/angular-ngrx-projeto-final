@@ -5,13 +5,13 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TarefaService {
 
   constructor(private _http: HttpClient) { }
 
-  public buscaTarefas(): Observable<ITarefa[]> {
+  public carregarTarefas(): Observable<ITarefa[]> {
     return this._http.get<ITarefa[]>(`${environment.baseUrlApi}/tarefas`);
   }
 }
