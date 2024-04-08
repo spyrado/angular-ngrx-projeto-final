@@ -8,10 +8,19 @@ import { environment } from '../../environments/environment.development';
   providedIn: 'root',
 })
 export class TarefaService {
+  
 
   constructor(private _http: HttpClient) { }
 
   public carregarTarefas(): Observable<ITarefa[]> {
     return this._http.get<ITarefa[]>(`${environment.baseUrlApi}/tarefas`);
+  }
+
+  public atualiza(tarefa: ITarefa) {
+    return this._http.put<ITarefa>(`${environment.baseUrlApi}/tarefas/${tarefa.id}`, tarefa);
+  }
+
+  public deletar(id: number) {
+    return this._http.delete<ITarefa>(`${environment.baseUrlApi}/tarefas/${id}`);
   }
 }

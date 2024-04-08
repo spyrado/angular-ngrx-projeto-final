@@ -26,19 +26,40 @@ export const tarefaReducer = createReducer(
     }
   }),
   on(tarefaActions.iniciarTarefa, (state, tarefa) => {
-    const novoEstado = {...state};
-    novoEstado.data = novoEstado.data.filter(item => item.id !== tarefa.id);
-    const tarefaAtualizada: ITarefa = {
-      ...tarefa, 
-      etapa: EtapaEnum.INICIADA 
-    };
     return {
-      ...novoEstado,
-      data: [
-        ...novoEstado.data,
-        tarefaAtualizada,
-      ],
+      ...state,
       status: StatusEnum.carregando
     };
-  })
+  }),
+  on(tarefaActions.tarefaIniciadaComSucesso, (state, tarefa) => {
+    const tarefas = state.data.filter(item => item.id !== tarefa.id);
+    tarefas.push(tarefa);
+    return {
+      ...state,
+      data: [...tarefas],
+      status: StatusEnum.sucesso
+    };
+  }),
+  on(tarefaActions.deletaTarefa, (state) => {
+    return {
+      ...state,
+      status: StatusEnum.carregando
+    };
+  }),
+  on(tarefaActions.tarefaDeletadaComSucesso, (state, data) => {
+    const tarefas = state.data.filter(tarefa => tarefa.id !== data.id);
+    return {
+      ...state,
+      data: [...tarefas],
+      status: StatusEnum.sucesso
+    };
+  }),
+  on(tarefaActions.tarefaFinalizadaComSucesso, (state, tarefa) => {
+    const tarefas = state.data.filter(item => item.id !== tarefa.id);
+    return {
+      ...state,
+      data: [...tarefas, tarefa],
+      status: StatusEnum.sucesso
+    }
+  }),
 )

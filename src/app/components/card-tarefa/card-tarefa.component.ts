@@ -20,12 +20,26 @@ export class CardTarefaComponent {
   @Input() titulo: string = '';
   @Input({ required: true }) etapa!: EtapaEnum;
   @Input() tarefas: ITarefa[] = [];
-  
+
   public EtapaEnum = EtapaEnum;
 
   constructor(private _store: Store<IAppState>) {}
 
-  public iniciarTarefa(tarefa: ITarefa): void {
+  
+  public decideTarefa(tarefa: ITarefa): void {
+    tarefa.etapa === EtapaEnum.BACKLOG && this.iniciarTarefa(tarefa);
+    tarefa.etapa === EtapaEnum.INICIADA && this.finalizaTarefa(tarefa);
+  }
+
+  public deletaTarefa(id: number) {
+    this._store.dispatch(tarefaActions.deletaTarefa({id}));
+  }
+
+  private iniciarTarefa(tarefa: ITarefa): void {
     this._store.dispatch(tarefaActions.iniciarTarefa(tarefa));
+  }
+
+  private finalizaTarefa(tarefa: ITarefa): void {
+    this._store.dispatch(tarefaActions.finalizaTarefa(tarefa))
   }
 }

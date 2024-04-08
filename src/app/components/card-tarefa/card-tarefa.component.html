@@ -8,18 +8,20 @@
         <li class="list-group-item d-flex justify-content-between list-group-item-light">
           <span class="me-4">{{ tarefa.nome }}</span>
           <div class="card-tarefa__actions">
-            @if (etapa === EtapaEnum.BACKLOG) {
-              <button (click)="iniciarTarefa(tarefa)" class="card-tarefa__icon-button" aria-label="iniciar tarefa">
-                <i-feather name="play" ari-featheria-hidden="true" class="card-tarefa__icon-play"></i-feather>
-              </button>
-            } @else {
+            @if (etapa !== EtapaEnum.BACKLOG) {
               <button class="card-tarefa__icon-button" aria-label="voltar tarefa">
                 <i-feather name="corner-down-left" aria-hidden="true" class="card-tarefa__icon-corner-down-left"></i-feather>
               </button>
             }
-            <button class="card-tarefa__icon-button" aria-label="excluir tarefa">
-              <i-feather name="trash" aria-hidden="true" class="card-tarefa__icon-trash"></i-feather>
-            </button>
+
+            @if (etapa !== EtapaEnum.FINALIZADA) {
+              <button (click)="decideTarefa(tarefa)" class="card-tarefa__icon-button" aria-label="iniciar tarefa">
+                <i-feather name="play" ari-featheria-hidden="true" class="card-tarefa__icon-play"></i-feather>
+              </button>
+              <button (click)="deletaTarefa(tarefa.id)" class="card-tarefa__icon-button" aria-label="excluir tarefa">
+                <i-feather name="trash" aria-hidden="true" class="card-tarefa__icon-trash"></i-feather>
+              </button>
+            }
           </div>
         </li>
       } @empty {
