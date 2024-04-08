@@ -8,8 +8,8 @@
         <li class="list-group-item d-flex justify-content-between list-group-item-light">
           <span class="me-4">{{ tarefa.nome }}</span>
           <div class="card-tarefa__actions">
-            @if (etapa !== EtapaEnum.BACKLOG) {
-              <button class="card-tarefa__icon-button" aria-label="voltar tarefa">
+            @if (etapa === EtapaEnum.INICIADA) {
+              <button (click)="retornarEtapa(tarefa)" class="card-tarefa__icon-button" aria-label="voltar tarefa">
                 <i-feather name="corner-down-left" aria-hidden="true" class="card-tarefa__icon-corner-down-left"></i-feather>
               </button>
             }

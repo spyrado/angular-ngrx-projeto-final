@@ -62,4 +62,12 @@ export const tarefaReducer = createReducer(
       status: StatusEnum.sucesso
     }
   }),
+  on(tarefaActions.tarefaRetornadaComSucesso, (state, tarefa) => {
+    const tarefas = state.data.filter(item => item.id !== tarefa.id);
+    return {
+      ...state,
+      data: [...tarefas, tarefa],
+      status: StatusEnum.sucesso
+    }
+  }),
 )

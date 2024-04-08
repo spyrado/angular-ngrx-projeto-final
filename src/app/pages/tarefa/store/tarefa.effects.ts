@@ -1,9 +1,10 @@
 import { inject } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { TarefaService } from "../../../services/tarefa.service";
+import { TarefaService } from "../../../services/tarefa/tarefa.service";
 import { tarefaActions } from "./tarefa.actions";
 import { map, of, switchMap, tap } from "rxjs";
 import { EtapaEnum } from "../../../enums";
+import { ITarefa } from "../../../interfaces";
 
 const carregarTarefasEffect = createEffect(
   (actions$ = inject(Actions), tarefaService = inject(TarefaService)) => {
@@ -82,9 +83,35 @@ const finalizaTarefaEffect = createEffect(
   }
 );
 
+const tarefaRetornadaEffect = createEffect(
+  (actions$ = inject(Actions), tarefaService = inject(TarefaService)) => {
+    return actions$
+      .pipe(
+        ofType(tarefaActions.retornarTarefa),
+        map(tarefa => retornaEtapa(tarefa)),
+        switchMap((tarefa) => 
+          tarefaService.atualiza(tarefa)
+            .pipe(map(() => tarefaActions.tarefaRetornadaComSucesso(tarefa)))
+        ),
+      )
+  },
+  {
+    functional: true
+  }
+);
+
+function retornaEtapa(tarefa: ITarefa): ITarefa {
+  const tarefaRetornada = { ...tarefa };
+  if(tarefa.etapa === EtapaEnum.INICIADA) {
+    tarefaRetornada.etapa = EtapaEnum.BACKLOG;
+  }
+  return tarefaRetornada;
+}
+
 export const tarefaEffects = {
   carregarTarefasEffect,
   iniciarTarefaEffect,
   deletaTarefaEffect,
-  finalizaTarefaEffect
+  finalizaTarefaEffect,
+  tarefaRetornadaEffect
 };

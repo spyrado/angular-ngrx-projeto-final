@@ -7,6 +7,7 @@ import { ITarefa } from '../../interfaces';
 import { IAppState } from '../../store/app.state';
 import { tarefaActions } from './store/tarefa.actions';
 import { CommonModule } from '@angular/common';
+import { AlertaService } from '../../services/alerta/alerta.service';
 
 @Component({
   selector: 'app-tarefa',
@@ -20,7 +21,10 @@ export class TarefaComponent {
   public EtapaEnum = EtapaEnum;
   public tarefas$ = this._store.select<ITarefa[]>(tarefaSelectors.carregarTarefas);
 
-  constructor(private _store: Store<IAppState>) {}
+  constructor(
+    private _store: Store<IAppState>,
+    public alertaService: AlertaService
+  ) {}
 
   ngOnInit(): void {
     this._store.dispatch(tarefaActions.carregarTarefas());

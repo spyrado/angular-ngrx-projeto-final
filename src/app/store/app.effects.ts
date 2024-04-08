@@ -5,4 +5,5 @@ export const appEffects = {
   iniciarTarefaEffect: tarefaEffects.iniciarTarefaEffect,
   deletaTarefaEffect: tarefaEffects.deletaTarefaEffect,
   finalizaTarefaEffect: tarefaEffects.finalizaTarefaEffect,
+  tarefaRetornadaEffect: tarefaEffects.tarefaRetornadaEffect,
 }

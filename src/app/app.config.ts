@@ -5,13 +5,16 @@ import { routes } from './app.routes';
 import { provideStore } from '@ngrx/store';
 import { appReducers } from './store/app.reducers';
 import { provideEffects } from '@ngrx/effects';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { appEffects } from './store/app.effects';
+import { errorInterceptor } from './interceptors/error.interceptors';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes), 
-    provideHttpClient(),
+    provideHttpClient(
+      withInterceptors([errorInterceptor])
+    ),
     provideStore(appReducers), 
     provideEffects(appEffects)
   ]

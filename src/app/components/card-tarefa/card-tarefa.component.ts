@@ -35,6 +35,10 @@ export class CardTarefaComponent {
     this._store.dispatch(tarefaActions.deletaTarefa({id}));
   }
 
+  public retornarEtapa(tarefa: ITarefa): void {
+    this._store.dispatch(tarefaActions.retornarTarefa(tarefa))
+  }
+
   private iniciarTarefa(tarefa: ITarefa): void {
     this._store.dispatch(tarefaActions.iniciarTarefa(tarefa));
   }
@@ -42,4 +46,5 @@ export class CardTarefaComponent {
   private finalizaTarefa(tarefa: ITarefa): void {
     this._store.dispatch(tarefaActions.finalizaTarefa(tarefa))
   }
+  
 }
