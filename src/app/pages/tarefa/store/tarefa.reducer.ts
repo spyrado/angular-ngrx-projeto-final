@@ -70,4 +70,11 @@ export const tarefaReducer = createReducer(
       status: StatusEnum.sucesso
     }
   }),
+  on(tarefaActions.tarefaCadastradaComSucesso, (state, tarefa) => {
+    return {
+      ...state,
+      data: [...state.data, tarefa],
+      status: StatusEnum.sucesso
+    }
+  }),
 )

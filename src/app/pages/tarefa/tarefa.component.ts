@@ -8,11 +8,12 @@ import { IAppState } from '../../store/app.state';
 import { tarefaActions } from './store/tarefa.actions';
 import { CommonModule } from '@angular/common';
 import { AlertaService } from '../../services/alerta/alerta.service';
+import { CadastrarTarefaComponent } from '../../cadastrar-tarefa/cadastrar-tarefa.component';
 
 @Component({
   selector: 'app-tarefa',
   standalone: true,
-  imports: [CardTarefaComponent, CommonModule],
+  imports: [CardTarefaComponent, CommonModule, CadastrarTarefaComponent],
   templateUrl: './tarefa.component.html',
   styleUrl: './tarefa.component.scss'
 })

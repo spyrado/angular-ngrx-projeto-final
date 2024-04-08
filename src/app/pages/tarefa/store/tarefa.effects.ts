@@ -100,6 +100,22 @@ const tarefaRetornadaEffect = createEffect(
   }
 );
 
+const cadastraTarefaEffect = createEffect(
+  (actions$ = inject(Actions), tarefaService = inject(TarefaService)) => {
+    return actions$
+      .pipe(
+        ofType(tarefaActions.cadastraTarefa),
+        switchMap((tarefa) => 
+          tarefaService.cria(tarefa)
+            .pipe(map((novaTarefa) => tarefaActions.tarefaCadastradaComSucesso(novaTarefa)))
+        ),
+      )
+  },
+  {
+    functional: true
+  }
+);
+
 function retornaEtapa(tarefa: ITarefa): ITarefa {
   const tarefaRetornada = { ...tarefa };
   if(tarefa.etapa === EtapaEnum.INICIADA) {
@@ -113,5 +129,6 @@ export const tarefaEffects = {
   iniciarTarefaEffect,
   deletaTarefaEffect,
   finalizaTarefaEffect,
-  tarefaRetornadaEffect
+  tarefaRetornadaEffect,
+  cadastraTarefaEffect
 };

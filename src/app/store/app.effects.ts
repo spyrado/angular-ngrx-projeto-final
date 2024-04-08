@@ -6,4 +6,5 @@ export const appEffects = {
   deletaTarefaEffect: tarefaEffects.deletaTarefaEffect,
   finalizaTarefaEffect: tarefaEffects.finalizaTarefaEffect,
   tarefaRetornadaEffect: tarefaEffects.tarefaRetornadaEffect,
+  cadastraTarefaEffect: tarefaEffects.cadastraTarefaEffect,
 }

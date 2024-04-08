@@ -3,7 +3,8 @@ import { ITarefa } from "../../../interfaces";
 
 const carregarTarefas = createAction('[TAREFA] carrega tarefas');
 const tarefasCarregadasComSucesso = createAction('[TAREFA] tarefas carregadas com sucesso', props<{ tarefas: ITarefa[] }>());
-const cadastraTarefa = createAction('[TAREFA] cadastra tarefa');
+const cadastraTarefa = createAction('[TAREFA] cadastra tarefa', props<ITarefa>());
+const tarefaCadastradaComSucesso = createAction('[TAREFA] tarefa cadastrada com sucesso', props<ITarefa>());
 const iniciarTarefa = createAction('[TAREFA] inicia tarefa', props<ITarefa>());
 const finalizaTarefa = createAction('[TAREFA] finaliza tarefa', props<ITarefa>());
 const tarefaFinalizadaComSucesso = createAction('[TAREFA] tarefa finalizada com sucesso', props<ITarefa>());
@@ -24,5 +25,6 @@ export const tarefaActions = {
   retornarTarefa,
   tarefaRetornadaComSucesso,
   deletaTarefa,
-  tarefaDeletadaComSucesso
+  tarefaDeletadaComSucesso,
+  tarefaCadastradaComSucesso
 };

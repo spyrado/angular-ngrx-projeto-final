@@ -8,7 +8,6 @@ import { environment } from '../../../environments/environment.development';
   providedIn: 'root',
 })
 export class TarefaService {
-  
 
   constructor(private _http: HttpClient) { }
 
@@ -16,6 +15,10 @@ export class TarefaService {
     return this._http.get<ITarefa[]>(`${environment.baseUrlApi}/tarefas`);
   }
 
+  public cria(tarefa: ITarefa) {
+    return this._http.post<ITarefa>(`${environment.baseUrlApi}/tarefas`, tarefa);
+  }
+  
   public atualiza(tarefa: ITarefa) {
     return this._http.put<ITarefa>(`${environment.baseUrlApi}/tarefas/${tarefa.id}`, tarefa);
   }

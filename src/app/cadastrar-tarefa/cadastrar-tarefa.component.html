@@ -1,0 +1,16 @@
+<form class="row g-3">
+  <div class="col-auto">
+    <label for="inputPassword2" class="visually-hidden">nome tarefa</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      id="inputnome tarefa2" 
+      placeholder="nome tarefa" 
+      [(ngModel)]="nomeTarefa"
+      [ngModelOptions]="{standalone: true}"
+    >
+  </div>
+  <div class="col-auto">
+    <button (click)="cadastrarTarefa(nomeTarefa)" type="submit" class="btn btn-primary mb-3">cadastrar</button>
+  </div>
+</form>
